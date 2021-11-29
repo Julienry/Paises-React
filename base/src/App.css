@@ -203,6 +203,42 @@ form .btn-limpar:hover {
   margin-bottom: 10px;
 }
 
+.modal__dados .btn-prev,
+.modal__dados .btn-next {
+  position: fixed;
+  z-index: 3;
+
+  width: 60px;
+  height: 60px;
+
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  padding: 4px;
+
+  background-color: rgba(60, 60, 65);
+}
+
+.modal__dados .btn-prev:hover,
+.modal__dados .btn-next:hover {
+  filter: brightness(105%);
+}
+.modal__dados .btn-prev:active,
+.modal__dados .btn-next:active {
+  filter: brightness(110%);
+}
+
+.modal__dados .btn-prev {
+  left: -30px;
+
+  padding-left: 0;
+}
+
+.modal__dados .btn-next {
+  right: -30px;
+
+  padding-right: 0;
+}
+
 .modal .btn-fechar {
   cursor: pointer;
 

@@ -1,4 +1,6 @@
 import btnDelete from "../assets/delete.svg";
+import btnPrev from "../assets/seta-esquerda-preta.svg";
+import btnNext from "../assets/seta-direita-preta.svg";
 
 function handleClick(e) {
   e.stopPropagation();
@@ -15,15 +17,42 @@ function PaisModal({
   populacao,
   fusoHorario,
   setModal,
+  paises,
+  index,
 }) {
   const linguagemArray = [];
   for (const linguagem in Object.keys(linguagens)) {
     linguagemArray.push(linguagens[Object.keys(linguagens)[linguagem]]);
   }
+  console.log(paises[index]);
   return (
     <div className="modal" onClick={() => setModal("")}>
       <div className="modal__dados" onClick={handleClick}>
         <img src={bandeira} alt={`bandeira do país ${nomeComum}`} />
+        <img
+          className="btn-prev"
+          onClick={() =>
+            setModal(
+              index === 0
+                ? paises[paises.length - 1].name.common
+                : paises[index - 1].name.common
+            )
+          }
+          src={btnPrev}
+          alt="país anterior"
+        />
+        <img
+          className="btn-next"
+          onClick={() =>
+            setModal(
+              index === paises.length - 1
+                ? paises[0].name.common
+                : paises[index + 1].name.common
+            )
+          }
+          src={btnNext}
+          alt="próximo país"
+        />
         <ul>
           <li>
             <b>Common name: </b>
@@ -61,6 +90,7 @@ function PaisModal({
             })}
           </li>
         </ul>
+
         <img
           className="btn-fechar"
           onClick={() => setModal("")}

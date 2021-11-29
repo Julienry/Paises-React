@@ -10,6 +10,7 @@ function App() {
   const [paisesSrc, setPaisesSrc] = useState([]);
   const [pesquisa, setPesquisa] = useState("");
   const [modal, setModal] = useState([]);
+  let index = undefined;
 
   useEffect(() => {
     fetch("https://restcountries.com/v3/all")
@@ -104,11 +105,16 @@ function App() {
       </div>
       {modal &&
         paises
-          .filter(
-            (pais) =>
+          .filter((pais, i) => {
+            if (
               pais.name.common === modal ||
               pais.translations.por.common === modal
-          )
+            ) {
+              index = i;
+              return pais;
+            }
+            return null;
+          })
           .map((paisFiltrado) => {
             console.log(paisFiltrado);
             return (
@@ -133,6 +139,8 @@ function App() {
                 populacao={paisFiltrado.population}
                 fusoHorario={paisFiltrado.timezones}
                 setModal={setModal}
+                paises={paises}
+                index={index}
               />
             );
           })}
