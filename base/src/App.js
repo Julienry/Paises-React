@@ -1,4 +1,4 @@
-import "./App.css";
+import "./App.scss";
 import { useState, useEffect } from "react";
 import btnDelete from "./assets/delete.svg";
 
@@ -64,7 +64,7 @@ function App() {
   }
 
   return (
-    <div className="App">
+    <div className="paises_container">
       <header>
         <form onSubmit={handlePesquisa}>
           <input

@@ -1,0 +1,242 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+// colors
+$white-heavier-transparency: #ffffff33;
+$white-lighter-transparency: #e1e1e180;
+$dark-grey: #3c3c41;
+$dark-grey-transparency: #3c3c4180;
+
+@mixin flexBox($jc: center, $dir: row) {
+  display: flex;
+  align-items: center;
+  justify-content: $jc;
+  flex-direction: $dir;
+}
+
+@mixin paddingBorder($p: 0, $b: 0, $br: 0) {
+  padding: $p;
+  border: $b;
+  border-radius: $br;
+}
+
+@mixin setSize($w: auto, $h: auto) {
+  width: $w;
+  height: $h;
+}
+
+body {
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-image: linear-gradient(to right, #2a2f39, #2b2f39, #2c2f39);
+
+  font-family: Roboto;
+}
+
+.paises_container {
+  @include flexBox(unset, column);
+  min-height: 100vh;
+
+  header {
+    @include flexBox();
+    @include setSize(100%, 80px);
+
+    position: sticky;
+    top: 0;
+    z-index: 1;
+
+    border-bottom: 1px solid $white-heavier-transparency;
+
+    background-color: rgba(60, 60, 65, 0.95);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+
+    form {
+      @include flexBox();
+      position: relative;
+
+      input {
+        all: unset;
+        @include setSize(300px);
+
+        @include paddingBorder(10px, solid 1px black, 5px);
+        background-color: white;
+
+        font-family: Roboto;
+        &:focus {
+          outline: black solid 2px;
+        }
+      }
+
+      .btn-limpar {
+        cursor: pointer;
+
+        position: absolute;
+        right: 10px;
+
+        @include setSize(20px, 20px);
+        @include paddingBorder(4px, 0, 50%);
+
+        background-color: $dark-grey-transparency;
+        &:hover {
+          filter: brightness(120%);
+        }
+      }
+    }
+
+    .btn-random {
+      all: unset;
+      cursor: pointer;
+
+      @include paddingBorder(7px 15px, 1px solid rgba(0, 0, 0, 0.4), 50%);
+      margin-left: 70px;
+
+      background-color: $white-lighter-transparency;
+
+      font-size: 20px;
+      &:hover {
+        filter: brightness(105%);
+      }
+      &:active {
+        filter: brightness(110%);
+      }
+    }
+  }
+
+  .paises {
+    @include flexBox();
+    padding: 20px;
+    flex-wrap: wrap;
+    gap: 20px;
+
+    .pais {
+      @include flexBox(center, column);
+      @include setSize(300px, 300px);
+
+      .pais__bandeira {
+        @include setSize(auto, 50%);
+        max-width: 85%;
+
+        border-radius: 10px;
+        margin-bottom: 20px;
+      }
+
+      .pais__nome {
+        text-align: center;
+        font-size: 26px;
+        color: white;
+      }
+      &:hover,
+      &:active {
+        @include paddingBorder(0, 2px solid $white-lighter-transparency, 10px);
+        background-image: linear-gradient(
+          130deg,
+          rgb(45, 50, 60),
+          rgb(50, 55, 65)
+        );
+      }
+      &:active {
+        filter: brightness(110%);
+      }
+    }
+  }
+}
+
+.modal {
+  @include flexBox();
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+
+  background-color: rgba(0, 0, 0, 0.2);
+
+  .modal__dados {
+    @include flexBox(space-around, column);
+
+    @include setSize(50%, 80%);
+
+    @include paddingBorder(
+      15px 35px,
+      2px solid $white-heavier-transparency,
+      5px
+    );
+    margin-top: 70px;
+
+    background-color: $dark-grey-transparency;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+
+    font-size: 20px;
+    color: white;
+
+    li {
+      list-style: none;
+
+      padding-bottom: 5px;
+      border-bottom: 1px solid $white-heavier-transparency;
+      margin-bottom: 5px;
+      &:last-child {
+        border-bottom: 0;
+      }
+    }
+
+    img {
+      @include setSize(auto, 130px);
+      max-width: 330px;
+
+      @include paddingBorder(0, 1px solid rgba(0, 0, 0, 0.05), 5px);
+      margin-bottom: 10px;
+    }
+
+    .btn-prev,
+    .btn-next {
+      cursor: pointer;
+
+      position: fixed;
+      z-index: 3;
+
+      @include setSize(60px, 60px);
+
+      @include paddingBorder(4px, 2px solid $white-heavier-transparency, 50%);
+
+      background-color: $dark-grey;
+      &:hover {
+        filter: brightness(105%);
+      }
+      &:active {
+        filter: brightness(110%);
+      }
+    }
+
+    .btn-prev {
+      left: -30px;
+      padding-left: 0;
+    }
+
+    .btn-next {
+      right: -30px;
+      padding-right: 0;
+    }
+
+    .btn-fechar {
+      cursor: pointer;
+
+      position: fixed;
+      top: -15px;
+      right: -15px;
+      z-index: 3;
+
+      @include setSize(35px, 35px);
+      @include paddingBorder(4px, 2px solid $white-heavier-transparency, 50%);
+
+      background-color: $dark-grey;
+    }
+  }
+}
